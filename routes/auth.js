@@ -3,6 +3,7 @@ const Joi = require('@hapi/joi');
 
 const Users = require('../model/Users');
 
+//Schema for validation
 const userSchemaValidate = Joi.object({
   name: Joi.string().min(6).required(),
   email: Joi.string().min(6).required().email(),
@@ -10,13 +11,12 @@ const userSchemaValidate = Joi.object({
 })
 
 router.post('/register', async (req,res) => {
-  //Validate the data before we create user
-  const { error } = userSchemaValidate.validate(req.body);
-  if(error){
-    return res.status(400).send(error.details[0].message)
-  }
-
   try{  
+    //Validate the data before we create user
+    const { error } = userSchemaValidate.validate(req.body);
+    if(error)
+      return res.status(400).send(error.details[0].message)
+
     const user = new Users({
       name: req.body.name,
       email: req.body.email,
