@@ -1,14 +1,7 @@
 const router = require('express').Router();
-const Joi = require('@hapi/joi');
 
 const Users = require('../model/Users');
-
-//Schema for validation
-const userSchemaValidate = Joi.object({
-  name: Joi.string().min(6).required(),
-  email: Joi.string().min(6).required().email(),
-  password: Joi.string().min(8).max(1024).required()
-})
+const validation = require('../validation');
 
 router.post('/register', async (req,res) => {
   try{  
@@ -22,6 +15,7 @@ router.post('/register', async (req,res) => {
       email: req.body.email,
       password: req.body.password
     })
+
     const savedUser = await user.save()
     res.status(200).send(savedUser);
   }catch(error){
