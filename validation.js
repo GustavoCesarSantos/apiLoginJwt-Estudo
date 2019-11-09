@@ -8,7 +8,7 @@ const registerValidation = (reqBody) => {
     password: Joi.string().min(8).max(1024).required()
   });
 
-  userSchemaValidate.validate(reqBody);
+  return userSchemaValidate.validate(reqBody);
 };
 
 const loginValidation = (reqBody) => {
@@ -18,7 +18,7 @@ const loginValidation = (reqBody) => {
     password: Joi.string().min(8).max(1024).required()
   });
 
-  loginSchemaValidate.validate(reqBody);
+  return loginSchemaValidate.validate(reqBody);
 };
 
 module.exports = { registerValidation, loginValidation }
