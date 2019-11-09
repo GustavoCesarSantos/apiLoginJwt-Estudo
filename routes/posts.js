@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const verify = require('./verifyToken');
+const verify = require('../middleware/verifyToken');
 
 router.get('/', verify, (req,res) => {
   res.json({ post: { title: 'First post', description: 'First text' } });
