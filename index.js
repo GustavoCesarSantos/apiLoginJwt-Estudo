@@ -20,4 +20,4 @@ const postsRoute = require('./routes/posts');
 app.use('/api/user', authRoute);
 app.use('/api/user/posts', postsRoute);
 
-app.listen(3000, console.log('Server on in port: 3000'));
+app.listen(8888, console.log('Server on in port: 3000'));
