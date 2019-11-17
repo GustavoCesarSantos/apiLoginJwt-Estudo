@@ -2,7 +2,12 @@ const jwt = require('jsonwebtoken');
 
 module.exports = function auth(req, res, next){
   try{
-    const token = req.header('Bearer');
+    let token = req.headers['x-access-token'] || req.headers['Authorization'];
+    if (token.startsWith('Bearer')) {
+      // Remove Bearer from string
+      token = token.slice(7, token.length);
+    }
+    
     if(!token)
       return res.status(401).send('Access Denied');
     
